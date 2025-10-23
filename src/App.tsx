@@ -2,12 +2,14 @@ import { useState } from "react";
 import "./App.css";
 
 interface TaskProps {
+  id: number;
   title: string;
 }
 
 function App() {
-  const [tasks, setTask] = useState<TaskProps[]>([]);
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const [taskId, setTaskId] = useState(1);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value);
@@ -16,8 +18,14 @@ function App() {
   function handleAddTask(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     if (inputValue.trim() === "") return;
-    setTask([...tasks, { title: inputValue }]);
+    setTasks([...tasks, { title: inputValue, id: taskId }]);
+    setTaskId(taskId + 1);
     setInputValue("");
+  }
+
+  function handleRemoveTask(idToRemove: number) {
+    const updateTasks = tasks.filter((item) => item.id !== idToRemove);
+    setTasks(updateTasks);
   }
   return (
     <div>
@@ -25,7 +33,7 @@ function App() {
       <div>
         <form onSubmit={handleAddTask}>
           <input type="checkbox" />
-          <input type="text" onChange={handleChange} />{" "}
+          <input value={inputValue} type="text" onChange={handleChange} />{" "}
           <button type="submit">+</button>
         </form>
       </div>
@@ -36,11 +44,12 @@ function App() {
         <div>
           {tasks ? (
             <ul>
-              <p>
-                {tasks.map((task) => (
-                  <li>{task.title}</li>
-                ))}
-              </p>
+              {tasks.map((task) => (
+                <p>
+                  <button onClick={() => handleRemoveTask(task.id)}>X</button>
+                  {task.title}
+                </p>
+              ))}
             </ul>
           ) : (
             <p>There's no task added</p>
