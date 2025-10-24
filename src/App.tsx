@@ -22,32 +22,39 @@ function App() {
     setTaskId(taskId + 1);
     setInputValue("");
   }
-
   function handleRemoveTask(idToRemove: number) {
     const updateTasks = tasks.filter((item) => item.id !== idToRemove);
     setTasks(updateTasks);
   }
   return (
-    <div>
+    <div className="content">
       <h1>To do list</h1>0 task added
       <div>
         <form onSubmit={handleAddTask}>
-          <input type="checkbox" />
-          <input value={inputValue} type="text" onChange={handleChange} />{" "}
-          <button type="submit">+</button>
+          {/* <input type="checkbox" /> */}
+          <input
+            className="input"
+            placeholder="Add a new task..."
+            value={inputValue}
+            type="text"
+            onChange={handleChange}
+          />{" "}
+          <button className="add-button" type="submit">
+            +
+          </button>
         </form>
       </div>
-      <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Done</button>
+      <div className="buttons">
+        <button className="button">All</button>
+        <button className="button">Active</button>
+        <button className="button">Done</button>
         <div>
           {tasks ? (
             <ul>
               {tasks.map((task) => (
                 <p>
-                  <button onClick={() => handleRemoveTask(task.id)}>X</button>
                   {task.title}
+                  <button onClick={() => handleRemoveTask(task.id)}>X</button>
                 </p>
               ))}
             </ul>
