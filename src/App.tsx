@@ -53,7 +53,8 @@ function App() {
   return (
     <div className="content">
       {JSON.stringify(tasks)}
-      <h1>To do list</h1>0 task added
+      <h1>To do list</h1>
+      {tasks.length} task added
       <div>
         <form onSubmit={handleAddTask}>
           <input
@@ -78,25 +79,30 @@ function App() {
         <button className="button" onClick={showDoneTasks}>
           Done
         </button>
-        <div>
-          {tasks ? (
-            <ul>
-              {tasks.map((task, index) => (
-                <p>
-                  <input
-                    type="checkbox"
-                    checked={task.checked}
-                    onChange={() => handleCheckBoxChange(index)}
-                  />
-                  {task.title}
-                  <button onClick={() => handleRemoveTask(task.id)}>X</button>
-                </p>
-              ))}
-            </ul>
-          ) : (
-            <p>There's no task added</p>
-          )}
-        </div>
+      </div>
+      <div className="tasks">
+        {tasks ? (
+          <ul>
+            {tasks.map((task, index) => (
+              <div className="task">
+                <input
+                  type="checkbox"
+                  checked={task.checked}
+                  onChange={() => handleCheckBoxChange(index)}
+                />
+                {task.title}
+                <button
+                  className="removeButton"
+                  onClick={() => handleRemoveTask(task.id)}
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </ul>
+        ) : (
+          <p>There's no task added</p>
+        )}
       </div>
     </div>
   );
