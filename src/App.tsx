@@ -11,20 +11,18 @@ function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [taskId, setTaskId] = useState(1);
+  const [filter, setFilter] = useState<"all" | "active" | "done">("all");
 
-  function showDoneTasks() {
-    const doneTasks = tasks.filter((task) => task.checked === true);
-    setTasks(doneTasks);
+  function showAllTasks() {
+    setFilter("all");
   }
 
   function showActiveTasks() {
-    const activeTasks = tasks.filter((task) => task.checked === false);
-    setTasks(activeTasks);
+    setFilter("active");
   }
 
-  function showAllTasks() {
-    const allTasks = tasks.filter((task) => task.checked === false || true);
-    setTasks(allTasks);
+  function showDoneTasks() {
+    setFilter("done");
   }
 
   function handleCheckBoxChange(index: number) {
@@ -49,6 +47,12 @@ function App() {
     const updateTasks = tasks.filter((item) => item.id !== idToRemove);
     setTasks(updateTasks);
   }
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "active") return !task.checked;
+    if (filter === "done") return task.checked;
+    return true;
+  });
 
   return (
     <div className="content">
@@ -81,9 +85,9 @@ function App() {
         </button>
       </div>
       <div className="tasks">
-        {tasks ? (
+        {filteredTasks.length > 0 ? (
           <ul>
-            {tasks.map((task, index) => (
+            {filteredTasks.map((task, index) => (
               <div className="task">
                 <input
                   type="checkbox"
