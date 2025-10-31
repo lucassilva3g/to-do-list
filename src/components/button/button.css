@@ -1,0 +1,19 @@
+
+.button {
+display: flex;
+ flex-direction: row;
+margin: 10px 5px;
+color: #000;
+font-weight: bold;
+background-color: rgb(236, 236, 236);
+padding: 10px 15px;
+border-radius: 10px;
+border: none;
+cursor: pointer;
+}
+
+.button:hover {
+    background-color: #d8d8d8;
+    transition: 0.5s;
+}
+

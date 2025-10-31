@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { Task } from "./components/task/task";
+import { Form } from "./components/form/form";
+import { FilterButton } from "./components/button/button";
+
 import "./App.css";
 
 interface TaskProps {
@@ -56,52 +60,29 @@ function App() {
 
   return (
     <div className="content">
-      {JSON.stringify(tasks)}
       <h1>To do list</h1>
       {tasks.length} task added
-      <div>
-        <form onSubmit={handleAddTask}>
-          <input
-            className="input"
-            placeholder="Add a new task..."
-            value={inputValue}
-            type="text"
-            onChange={handleChange}
-          />{" "}
-          <button className="add-button" type="submit">
-            +
-          </button>
-        </form>
-      </div>
-      <div className="buttons">
-        <button className="button" onClick={showAllTasks}>
-          All
-        </button>
-        <button className="button" onClick={showActiveTasks}>
-          Active
-        </button>
-        <button className="button" onClick={showDoneTasks}>
-          Done
-        </button>
+      <Form
+        value={inputValue}
+        onChange={handleChange}
+        onSubmit={handleAddTask}
+      />
+      <div className="filter-buttons">
+        <FilterButton title="All" onClick={showAllTasks} />
+        <FilterButton title="Active" onClick={showActiveTasks} />
+        <FilterButton title="Done" onClick={showDoneTasks} />
       </div>
       <div className="tasks">
         {filteredTasks.length > 0 ? (
           <ul>
             {filteredTasks.map((task, index) => (
-              <div className="task">
-                <input
-                  type="checkbox"
-                  checked={task.checked}
-                  onChange={() => handleCheckBoxChange(index)}
-                />
-                {task.title}
-                <button
-                  className="removeButton"
-                  onClick={() => handleRemoveTask(task.id)}
-                >
-                  X
-                </button>
-              </div>
+              <Task
+                id={task.id}
+                title={task.title}
+                checked={task.checked}
+                onToggle={() => handleCheckBoxChange(index)}
+                onRemove={() => handleRemoveTask(task.id)}
+              />
             ))}
           </ul>
         ) : (

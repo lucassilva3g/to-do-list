@@ -1,0 +1,20 @@
+.input {
+    padding: 10px;
+    width: 500px;
+    border: none;
+    border-radius: 8px;
+}
+
+.add-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: oklch(.546 .245 262.881);
+    border: none;
+    cursor: pointer;
+}
+
+.add-button:hover {
+background-color: oklch(48.993% 0.18504 262.88);
+transition: 0.5s;
+}
+
