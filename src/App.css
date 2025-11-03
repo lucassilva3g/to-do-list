@@ -2,13 +2,22 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 100px;
-    height: 78vh;
-    width: 100vh;
+    height: 100%;
+width: 100vw;
     background-color:#b9b4b4 ;
 }
 
+.tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.task-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
 .filter-buttons {
     display: flex;

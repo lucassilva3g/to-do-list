@@ -1,21 +1,77 @@
 .task {
 display: flex;
 color: #000;
-font-size: 14px;
+font-size: 16px;
 background-color: #fff;
+padding: 0 10px;
 margin: 20px;
-width: 600px;
-height: 40px;
+width: 550px;
+height: 60px;
 justify-content: space-between;
 align-items: center;
 border:none;
 border-radius: 8px;
 }
 
+.task-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type='checkbox']:checked ~ .task-text {
+    text-decoration: line-through;
+    color: #777;
+    opacity: 0.7;
+     margin: 8px;
+}
+
+
+.custom-checkbox {
+   width: 15px;
+   height: 15px;
+ border: 1px solid #ccc;
+  border-radius: 4px;
+   position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: "✔";
+  position: absolute;
+  top: -4px;
+  left: 1px;
+  font-size: 16px;
+  color: green;
+}
+
+.task-text {
+  white-space: nowrap; /*keeps the text on one line */
+ overflow: hidden;   /*hides anything that doesn’t fit */
+ text-overflow: ellipsis;   /*adds the ... */
+ padding: 10px;
+}
+
 .removeButton {
     border: none;
-    padding: 12.5px;
+    font-size: 15px;
+    color: #ccc;
+    background-color: #fff;
+    padding: 11.5px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     cursor: pointer;
+}
+
+.removeButton:hover {
+background-color: #e6dede;
+border-radius: 8px;
+transition: 0.3s;
+color: red;
 }

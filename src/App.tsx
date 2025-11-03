@@ -58,6 +58,12 @@ function App() {
     return true;
   });
 
+  function getEmptyMessage() {
+    if (filter === "active") return "🎉 All tasks completed!";
+    if (filter === "done") return "There are no completed tasks";
+    return "There's no task added";
+  }
+
   return (
     <div className="content">
       <h1>To do list</h1>
@@ -68,15 +74,28 @@ function App() {
         onSubmit={handleAddTask}
       />
       <div className="filter-buttons">
-        <FilterButton title="All" onClick={showAllTasks} />
-        <FilterButton title="Active" onClick={showActiveTasks} />
-        <FilterButton title="Done" onClick={showDoneTasks} />
+        <FilterButton
+          title="All"
+          active={filter === "all"}
+          onClick={showAllTasks}
+        />
+        <FilterButton
+          title="Active"
+          active={filter === "active"}
+          onClick={showActiveTasks}
+        />
+        <FilterButton
+          title="Done"
+          active={filter === "done"}
+          onClick={showDoneTasks}
+        />
       </div>
       <div className="tasks">
         {filteredTasks.length > 0 ? (
-          <ul>
+          <div className="task-list">
             {filteredTasks.map((task, index) => (
               <Task
+                key={task.id}
                 id={task.id}
                 title={task.title}
                 checked={task.checked}
@@ -84,9 +103,9 @@ function App() {
                 onRemove={() => handleRemoveTask(task.id)}
               />
             ))}
-          </ul>
+          </div>
         ) : (
-          <p>There's no task added</p>
+          <p>{getEmptyMessage()}</p>
         )}
       </div>
     </div>

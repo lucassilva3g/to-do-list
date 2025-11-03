@@ -1,5 +1,5 @@
 
-.button {
+.filter-button {
 display: flex;
  flex-direction: row;
 margin: 10px 5px;
@@ -12,8 +12,12 @@ border: none;
 cursor: pointer;
 }
 
-.button:hover {
+.filter-button:hover {
     background-color: #d8d8d8;
+     transform: translateY(1px);
     transition: 0.5s;
 }
 
+.filter-button.active {
+    background-color: oklch(.546 .245 262.881);
+}
