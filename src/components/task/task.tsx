@@ -7,9 +7,17 @@ interface TaskProps {
   checked: boolean;
   onToggle: () => void;
   onRemove: () => void;
+  onView: (id: number) => void;
 }
 
-export function Task({ id, title, checked, onToggle, onRemove }: TaskProps) {
+export function Task({
+  id,
+  title,
+  checked,
+  onToggle,
+  onRemove,
+  onView,
+}: TaskProps) {
   return (
     <div className="task-row">
       <div className="task">
@@ -25,7 +33,7 @@ export function Task({ id, title, checked, onToggle, onRemove }: TaskProps) {
           <FaRegTrashCan />
         </button>
       </div>
-      <FaEye />
+      <FaEye className="view-icon" onClick={() => onView(id)} />
     </div>
   );
 }

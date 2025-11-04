@@ -16,6 +16,8 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [taskId, setTaskId] = useState(1);
   const [filter, setFilter] = useState<"all" | "active" | "done">("all");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<number | null>(null);
 
   function showAllTasks() {
     setFilter("all");
@@ -45,6 +47,11 @@ function App() {
     setTasks([...tasks, { title: inputValue, id: taskId, checked: false }]);
     setTaskId(taskId + 1);
     setInputValue("");
+  }
+
+  function viewTask(id: number) {
+    setSelectedTask(id);
+    setIsModalOpen(true);
   }
 
   function handleRemoveTask(idToRemove: number) {
@@ -101,6 +108,7 @@ function App() {
                 checked={task.checked}
                 onToggle={() => handleCheckBoxChange(index)}
                 onRemove={() => handleRemoveTask(task.id)}
+                onView={viewTask}
               />
             ))}
           </div>
@@ -108,6 +116,19 @@ function App() {
           <p>{getEmptyMessage()}</p>
         )}
       </div>
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Task Details</h2>
+            {tasks
+              .filter((t) => t.id === selectedTask)
+              .map((task) => (
+                <p className="title" key={task.id}>{task.title}</p>
+              ))}
+            <button onClick={() => setIsModalOpen(false)}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
