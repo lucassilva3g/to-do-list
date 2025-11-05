@@ -1,0 +1,33 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+
+}
+
+
+.modal {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    color: black;
+    margin-top: 13%;
+    padding: 20px;
+    height: 200px;
+    border-radius: 12px;
+    min-width: 260px;
+
+}
+
+.title {
+font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 350px;
+    display: block;
+}

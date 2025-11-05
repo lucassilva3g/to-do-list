@@ -4,11 +4,13 @@ import { Form } from "./components/form/form";
 import { FilterButton } from "./components/button/button";
 
 import "./App.css";
+import { TaskDetails } from "./components/task-details/task-details";
 
-interface TaskProps {
+export interface TaskProps {
   id: number;
   title: string;
   checked: boolean;
+  description?: string;
 }
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
   const [filter, setFilter] = useState<"all" | "active" | "done">("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<number | null>(null);
+
+  const [inputDescription, setInputDescription] = useState("");
 
   function showAllTasks() {
     setFilter("all");
@@ -71,6 +75,25 @@ function App() {
     return "There's no task added";
   }
 
+  function addDescription(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (inputDescription.trim() === "") return;
+    if (selectedTask === null) return;
+
+    const updatedTasks = tasks.map((task) =>
+      task.id === selectedTask
+        ? { ...task, description: inputDescription }
+        : task
+    );
+
+    setTasks(updatedTasks);
+    setInputDescription("");
+  }
+
+  function inputDescriptionValue(e: React.ChangeEvent<HTMLInputElement>) {
+    setInputDescription(e.target.value);
+  }
+
   return (
     <div className="content">
       <h1>To do list</h1>
@@ -117,17 +140,14 @@ function App() {
         )}
       </div>
       {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h2>Task Details</h2>
-            {tasks
-              .filter((t) => t.id === selectedTask)
-              .map((task) => (
-                <p className="title" key={task.id}>{task.title}</p>
-              ))}
-            <button onClick={() => setIsModalOpen(false)}>Close</button>
-          </div>
-        </div>
+        <TaskDetails
+          inputDescription={inputDescription}
+          onClose={() => setIsModalOpen(false)}
+          tasks={tasks}
+          selectedTask={selectedTask}
+          onChange={inputDescriptionValue}
+          onSubmit={addDescription}
+        />
       )}
     </div>
   );
