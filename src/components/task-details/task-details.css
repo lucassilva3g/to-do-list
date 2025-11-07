@@ -9,6 +9,7 @@
 
 
 .modal {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -17,17 +18,56 @@
     color: black;
     margin-top: 13%;
     padding: 20px;
-    height: 200px;
+    height: 230px;
     border-radius: 12px;
     min-width: 260px;
 
 }
 
 .title {
-font-size: 20px;
+    font-size: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 350px;
     display: block;
+}
+
+.description {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-width: 450px;
+}
+
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    color: #ccc;
+    background-color: #fff;
+
+}
+
+.close-icon:hover {
+    transition: 0.5s;
+    color: red;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 100%;
+    width: 450px;
+}
+
+.description-input {
+    border: none;
+    outline: none;
 }

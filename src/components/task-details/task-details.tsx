@@ -1,3 +1,4 @@
+import { IoMdCloseCircle } from "react-icons/io";
 import type { TaskProps } from "../../App";
 import "./task-details.css";
 
@@ -21,21 +22,25 @@ export function TaskDetails({
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <button onClick={onClose}>Close</button>
+        <IoMdCloseCircle className="close-icon" onClick={onClose} />
 
         {tasks
           .filter((t) => t.id === selectedTask)
           .map((task) => (
-            <div key={task.id}>
+            <div className="modal-content" key={task.id}>
               <p className="title">{task.title}</p>
-              <p>{task.description || "No description yet"}</p>
+              <p className="description">
+                {task.description || "No description yet"}
+              </p>
 
               <form onSubmit={onSubmit}>
                 <input
+                  maxLength={150}
                   value={inputDescription}
                   onChange={onChange}
                   type="text"
                   placeholder="Add Description"
+                  className="description-input"
                 />
                 <button type="submit">add</button>
               </form>

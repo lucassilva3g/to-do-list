@@ -7,19 +7,20 @@ interface FormProps {
 }
 export function Form({ onSubmit, onChange, value }: FormProps) {
   return (
-  <div>
-    <form onSubmit={onSubmit}>
-      <input
-        className="input"
-        placeholder="Add a new task..."
-        value={value}
-        type="text"
-        onChange={onChange}
-      />{" "}
-      <button className="add-button" type="submit">
-        +
-      </button>
-    </form>
-  </div>
-  )
+    <div>
+      <form onSubmit={onSubmit}>
+        <input
+          className="input"
+          placeholder="Add a new task..."
+          value={value}
+          type="text"
+          onChange={onChange}
+          maxLength={70}
+        />{" "}
+        <button className="add-button" type="submit">
+          +
+        </button>
+      </form>
+    </div>
+  );
 }
