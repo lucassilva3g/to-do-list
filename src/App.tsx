@@ -1,17 +1,10 @@
 import { Task } from "./components/task/task";
 import { Form } from "./components/form/form";
-import { FilterButton } from "./components/button/button";
 
 import "./App.css";
 import { TaskDetails } from "./components/task-details/task-details";
 import { useTasks } from "./hooks/useTasks";
-
-export interface TaskProps {
-  id: number;
-  title: string;
-  checked: boolean;
-  description?: string;
-}
+import { FilterButtons } from "./components/filter-buttons/filter-buttons";
 
 function App() {
   const {
@@ -45,20 +38,11 @@ function App() {
         onSubmit={handleAddTask}
       />
       <div className="filter-buttons">
-        <FilterButton
-          title="All"
-          active={filter === "all"}
-          onClick={showAllTasks}
-        />
-        <FilterButton
-          title="Active"
-          active={filter === "active"}
-          onClick={showActiveTasks}
-        />
-        <FilterButton
-          title="Done"
-          active={filter === "done"}
-          onClick={showDoneTasks}
+        <FilterButtons
+          filter={filter}
+          showAllTasks={showAllTasks}
+          showActiveTasks={showActiveTasks}
+          showDoneTasks={showDoneTasks}
         />
       </div>
       <div className="tasks">

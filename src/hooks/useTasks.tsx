@@ -1,6 +1,5 @@
 import { useState } from "react";
-import type { TaskProps } from "../App";
-
+import type { TaskProps } from "../types/task";
 export function useTasks() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [inputValue, setInputValue] = useState("");
